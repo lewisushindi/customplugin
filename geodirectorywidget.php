@@ -21,27 +21,26 @@ class Geodirectory_Image_Widget extends WP_Widget {
   }
 
   public function form( $instance ) {
-    $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Geodirectory Images', 'text_domain' );
+    $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Geodirectory Images', 'text_domain');
     ?>
     <p>
-      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
-      <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'text_domain' ); ?></label>
+    <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
     </p>
     <?php
-  }
-
-  public function update( $new_instance, $old_instance ) {
+    }
+    
+    public function update( $new_instance, $old_instance ) {
     $instance = array();
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
     return $instance;
-  }
-
-}
-
-// Register Geodirectory_Image_Widget widget
-function register_geodirectory_image_widget() {
-  register_widget( 'Geodirectory_Image_Widget' );
-}
-add_action( 'widgets_init', 'register_geodirectory_image_widget' );
-
+    }
+    
+    }
+    
+    // Register Geodirectory_Image_Widget widget
+    function register_geodirectory_image_widget() {
+    register_widget( 'Geodirectory_Image_Widget' );
+    }
+    add_action( 'widgets_init', 'register_geodirectory_image_widget' );
 
