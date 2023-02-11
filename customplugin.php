@@ -19,7 +19,7 @@ function custom_plugin_install() {
     $table_check_sql = $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name );
     $table_check = $wpdb->get_var( $table_check_sql );
 
-    // If the table exists, modify it to match the latest schema
+    // modify it to match the latest schema if the table exists
     if ( $table_check == $table_name ) {
         $sql = $wpdb->prepare( "ALTER TABLE %s 
                 ADD COLUMN new_column varchar(200) NOT NULL DEFAULT 'default_value'
