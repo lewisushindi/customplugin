@@ -70,7 +70,7 @@ function Custom_Plugin_menu()
         __('Custom Plugin', 'custom-plugin'), 
         'manage_options', 
         'custom-plugin', 
-        'custom_plugin_settings_page'
+        'custom_Plugin_settings_page'
     );
 }
 add_action('admin_menu', 'Custom_Plugin_menu');
@@ -95,7 +95,7 @@ function Custom_Plugin_Settings_page()
     echo '<div class="wrap">';
     echo '<h1>' . __('Custom Plugin Settings', 'custom-plugin') . '</h1>';
     echo '<form method="post" action="options.php">';
-    settings_fields('custom-plugin-settings-group');
+    settings_fields('custom-Plugin-settings-group');
     do_settings_sections('custom-plugin');
     submit_button();
     echo '</form>';
@@ -127,6 +127,7 @@ function Custom_Plugin_settings()
         'username',
         array('type' => 'string')
     );
+    register_setting('custom-Plugin-settings-group', 'custom_settings');
 }
 
 add_action('admin_init', 'Custom_Plugin_settings');
@@ -188,17 +189,22 @@ function Custom_Plugin_Save_username()
             return;
         }
         global $wpdb;
-        $table_name = $wpdb->prefix . "custom_table";
+        $table_name = $wpdb->prefix . 'custom_table';
         $wpdb->insert(
             $table_name,
             array(
-                'username' => $username,
-                'image_url' => $image_url
+                'username'  => $username,
+                'image_url' => $image_url['url'],
             ),
-            array('%s', '%s')
-        );        
+            array(
+                '%s',
+                '%s',
+            )
+        );
     }
 }
+add_action('admin_init', 'Custom_Plugin_Save_username');
+
 
 /**
  * Widget for displaying images from the custom database table.
@@ -217,7 +223,7 @@ class Custom_Plugin_Widget extends WP_Widget
     function __construct() 
     {
         parent::__construct(
-            'custom_plugin_widget',
+            'Custom_Plugin_Widget',
             __('Custom Plugin Widget', 'custom-plugin'),
             array(
                 'description' => __(
