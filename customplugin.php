@@ -23,8 +23,7 @@ function Custom_Plugin_install() {
     global $wpdb;
     $table_name      = $wpdb->prefix . 'custom_table';
     $charset_collate = $wpdb->get_charset_collate();
-
-    // Check if the table exists
+    
     $table_check_sql = $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name );
     $table_check     = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
 
